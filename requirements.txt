@@ -1,0 +1,13 @@
+BeautifulSoup==3.2.1
+Flask==0.9
+Flask-Script==0.4.0
+Jinja2==2.6
+Pillow==1.7.7
+Werkzeug==0.9.4
+argparse==1.1
+dbf==0.94.005
+lxml==3.3.0
+meld3==0.6.10
+path.py==2.3
+scrubber==1.6.1
+wsgiref==0.1.2
