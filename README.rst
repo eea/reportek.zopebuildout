@@ -31,21 +31,25 @@ than the python shipped with RHEL 6.5. We will also need additional repos: PUIAS
   $ yum install python-pip python27-setuptools subversion git libxml2-devel libxslt-devel munin-node perl-XML-SAX
 
 Reportek-convertes system packages::
+
   $ yum install unrar unzip p7zip mdbtools wv xlhtml libxslt poppler-utils gdal-libs java-1.6.0-openjdk
   $ easy_install-2.7 virtualenv
 
 Debian based systems
 ~~~~~~~~~~~~~~~~~~~~
 ::
+
   $ sudo bash
   $ apt-get install python2.7 python2.7-dev python-ldap python-setuptools subversion git libxml2-dev libxslt-dev munin-node libxml-sax-perl python-virtualenv
 
 Reportek-convertes system packages::
+
   $ apt-get install unrar p7zip-full mdbtools wv xlhtml xsltproc unzip ppthtml pdftohtml python-gdal openjdk-6-jre
 
 Product directory
 ~~~~~~~~~~~~~~~~~
 ::
+
   $ mkdir -p /var/local/bdr/production
 
 
@@ -87,8 +91,7 @@ Make sure you have installed the system packages for reportek-converters (see ab
 Build production
 ----------------
 Note that the production deployment will use Products.Reportek egg from
-http://eggshop.eaudeweb.ro/
-::
+http://eggshop.eaudeweb.ro/ ::
 
   $ cd /var/local/bdr/production
   $ . prod-venv/bin/activate
@@ -102,8 +105,8 @@ Build staging
 -------------
 This deployment is what runns behind https://bdr-test.eionet.europa.eu/
 Note that staging will user Products.Reportek from sources (through mr.developer)
-https://svn.eionet.europa.eu/repositories/Zope/trunk/Products.Reportek/
-::
+https://svn.eionet.europa.eu/repositories/Zope/trunk/Products.Reportek/ ::
+
   $ mkdir -p /var/local/bdr/staging
   $ cd /var/local/bdr/staging
   $ git clone https://github.com/eea/bdr.zopebuildout zope
@@ -123,9 +126,8 @@ Build devel
 -------------
 Note that devel will user Products.Reportek from sources (through mr.developer)
 https://svn.eionet.europa.eu/repositories/Zope/trunk/Products.Reportek/
-but has always-checkout = false so that you can control the version of your sources
+but has always-checkout = false so that you can control the version of your sources::
 
-::
   $ mkdir -p /var/local/bdr/devel
   $ cd /var/local/bdr/devel
   $ git clone https://github.com/eea/bdr.zopebuildout zope
