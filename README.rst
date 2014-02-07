@@ -128,6 +128,7 @@ Find out what dir the reportek.converters egg is intalled to and start gunicorn:
   * $ cd eggs/reportek.converters-<ver>.egg/Products/reportek.converters/ && ../../../../zope/bin/gunicorn -b localhost:5002 web:app
 
 
+========
 Contacts
 ========
 The project owner is Søren Roug (soren.roug at eaa.europa.eu)
@@ -138,6 +139,7 @@ Other people involved in this project are::
  - Daniel Mihai Bărăgan (daniel.baragan at eaudeweb.ro)
 
 
+=========
 Resources
 =========
 
