@@ -30,7 +30,7 @@ than the python shipped with RHEL 6.5. We will also need additional repos: PUIAS
   $ sudo bash
   $ yum install python-pip python27-setuptools subversion git libxml2-devel libxslt-devel munin-node perl-XML-SAX
 
-Reportek-convertes system packages::
+Reportek-converters system packages::
 
   $ yum install unrar unzip p7zip mdbtools wv xlhtml libxslt poppler-utils gdal-libs java-1.6.0-openjdk
   $ easy_install-2.7 virtualenv
@@ -42,7 +42,7 @@ Debian based systems
   $ sudo bash
   $ apt-get install python2.7 python2.7-dev python-ldap python-setuptools subversion git libxml2-dev libxslt-dev munin-node libxml-sax-perl python-virtualenv
 
-Reportek-convertes system packages::
+Reportek-converters system packages::
 
   $ apt-get install unrar p7zip-full mdbtools wv xlhtml xsltproc unzip ppthtml pdftohtml python-gdal openjdk-6-jre
 
@@ -75,19 +75,6 @@ We shall use virtualenv & co for isolated packages::
   $ pip install -r zope/requirements.txt
 
 
-Install local-converters
-------------------------
-Make sure you have installed the system packages for reportek-converters (see above)::
-
-  $ cd /var/local/bdr/production
-  $ . ./prod-venv/bin/activate
-  $ git clone https://github.com/eea/reportek-converters local-converters
-  $ cd local-converters
-  $ pip install -r requirements.txt
-  $ mkdir lib
-  $ wget -P lib http://archive.apache.org/dist/tika/tika-app-1.2.jar
-
-
 Build production
 ----------------
 Note that the production deployment will use Products.Reportek egg from
@@ -115,11 +102,10 @@ https://svn.eionet.europa.eu/repositories/Zope/trunk/Products.Reportek/ ::
   $ pip install -r zope/requirements.txt
   $ cd zope
   $ ./bin/buildout -c staging.cfg
+  $ ./bin/instance
 
-Install local-converters in staging/local-converters (see above) but using 
-staging-venv environment::
-  * Start instance ./bin/instance
-  * $ cd ../local-converters && ../zope/bin/gunicorn -b localhost:5001 web:app
+Find out what dir the reportek.converters egg is intalled to and start gunicorn::
+  * $ cd eggs/reportek.converters-<ver>.egg/Products/reportek.converters/ && ../../../../zope/bin/gunicorn -b localhost:5001 web:app
 
 
 Build devel
@@ -136,18 +122,42 @@ but has always-checkout = false so that you can control the version of your sour
   $ pip install -r zope/requirements-dev.txt
   $ cd zope
   $ ./bin/buildout -c devel.cfg
+  $ ./bin/instance
 
-Install local-converters in devel/local-converters (see above) but using 
-devel-venv environment
-Start instance ./bin/instance::
-  $ cd ../local-converters && ../zope/bin/gunicorn -b localhost:5002 web:app
+Find out what dir the reportek.converters egg is intalled to and start gunicorn::
+  * $ cd eggs/reportek.converters-<ver>.egg/Products/reportek.converters/ && ../../../../zope/bin/gunicorn -b localhost:5002 web:app
 
 
 Contacts
---------
+========
 The project owner is Søren Roug (soren.roug at eaa.europa.eu)
 
 Other people involved in this project are::
  - Cornel Nițu (cornel.nitu at eaudeweb.ro)
  - Miruna Bădescu (miruna.badescu at eaudeweb.ro)
  - Daniel Mihai Bărăgan (daniel.baragan at eaudeweb.ro)
+
+
+Resources
+=========
+
+
+Hardware
+--------
+
+Minimum requirements:
+ * 2048MB RAM
+ * 2 CPU 1.8GHz or faster
+ * 4GB hard disk space
+
+Recommended:
+ * 4096MB RAM
+ * 4 CPU 2.4GHz or faster
+ * 8GB hard disk space
+
+
+Software
+--------
+
+Any recent Linux version.
+apache2, local ldap server
