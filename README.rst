@@ -84,6 +84,7 @@ http://eggshop.eaudeweb.ro/ ::
   $ . prod-venv/bin/activate
   $ cd zope
   $ ./bin/buildout -c production.cfg
+  $ ./bin/supervisorctl reload || .bin/supervisord
 
 Check logs/supervisor.log to see if all the procs started
 
@@ -102,10 +103,7 @@ https://svn.eionet.europa.eu/repositories/Zope/trunk/Products.Reportek/ ::
   $ pip install -r zope/requirements.txt
   $ cd zope
   $ ./bin/buildout -c staging.cfg
-  $ ./bin/instance
-
-Find out what dir the reportek.converters egg is intalled to and start gunicorn::
-  * $ cd eggs/reportek.converters-<ver>.egg/Products/reportek.converters/ && ../../../../zope/bin/gunicorn -b localhost:5001 web:app
+  $ ./bin/supervisorctl reload || .bin/supervisord
 
 
 Build devel
