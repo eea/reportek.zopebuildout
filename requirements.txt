@@ -10,5 +10,4 @@ lxml==3.3.0
 meld3==0.6.10
 path.py==2.3
 scrubber==1.6.1
-translate-toolkit==1.11.0
 wsgiref==0.1.2
