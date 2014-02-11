@@ -28,12 +28,14 @@ We will need pip to install some python related packages for versions greater
 than the python shipped with RHEL 6.5. We will also need additional repos: PUIAS::
 
   $ sudo bash
-  $ yum install python-pip python27-setuptools subversion git libxml2-devel libxslt-devel munin-node perl-XML-SAX
+  $ yum install python-pip python27-setuptools subversion git libxml2-devel libxslt-devel munin-node perl-XML-SAX cronie
 
 Reportek-converters system packages::
 
   $ yum install unrar unzip p7zip mdbtools wv xlhtml libxslt poppler-utils gdal-libs java-1.6.0-openjdk
   $ easy_install-2.7 virtualenv
+
+Make sure crond (from cronie package) starts automatically on RHEL systems.
 
 Debian based systems
 ~~~~~~~~~~~~~~~~~~~~
@@ -218,3 +220,17 @@ Software
 
 Any recent Linux version.
 apache2, local ldap server
+
+=====================
+Copyright and license
+=====================
+
+The Initial Owner of the Original Code is European Environment Agency (EEA). All Rights Reserved.
+
+The BDR Original Code (this buildout and products listed at section 'Internal dependencies') is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+More details under `LICENSE.txt`_.
+
+-------
+
+.. _`LICENSE.txt`: https://github.com/eea/bdr.zopebuildout/blob/master/LICENSE.txt
