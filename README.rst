@@ -160,6 +160,16 @@ In order to regenerare translation files got to buzzardNT and::
   $ ./update.sh [path/to/i18ndude - default buzzardNT staging deployment bin dir]
   - commit changes
 
+Update translations - alternative
+--------------------------------
+This is done on the developer's machine.
+
+ * Get backups from production
+ * put them on dev machine on an instalation of bdr
+ * use staging or development deployment to have the sources, checkout at a specific date in order to match the egg on production if required
+ * follow the steps above with the fs paths of your machine.
+Note that you will probably not be able to login not having a local ldap of your own, but that is not required
+
 
 Generate xliff files
 --------------------
