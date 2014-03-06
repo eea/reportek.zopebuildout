@@ -86,7 +86,7 @@ http://eggshop.eaudeweb.ro/ ::
   $ . prod-venv/bin/activate
   $ cd zope
   $ ./bin/buildout -c production.cfg
-  $ ./bin/supervisorctl reload 1>/dev/null || .bin/supervisord
+  $ ./bin/supervisorctl reload 1>/dev/null || ./bin/supervisord
 
 Check logs/supervisor.log to see if all the procs started
 
@@ -105,7 +105,7 @@ https://svn.eionet.europa.eu/repositories/Zope/trunk/Products.Reportek/ ::
   $ pip install -r zope/requirements-staging.txt
   $ cd zope
   $ ./bin/buildout -c staging.cfg
-  $ ./bin/supervisorctl reload 1>/dev/null || .bin/supervisord
+  $ ./bin/supervisorctl reload 1>/dev/null || ./bin/supervisord
 
 
 Build devel
