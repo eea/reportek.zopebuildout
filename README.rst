@@ -60,9 +60,9 @@ Internal dependencies
 This buildout depends on us having the following products
 
  * Products.Reportek https://svn.eionet.europa.eu/repositories/Zope/trunk/Products.Reportek/
- * XMLRPCMethod https://svn.eionet.europa.eu/repositories/Zope/trunk/XMLRPCMethod/ 
- * RDFGrabber https://svn.eionet.europa.eu/repositories/Zope/trunk/RDFGrabber/ 
- * SmallObligations https://svn.eionet.europa.eu/repositories/Zope/trunk/SmallObligations/ 
+ * XMLRPCMethod https://svn.eionet.europa.eu/repositories/Zope/trunk/XMLRPCMethod/
+ * RDFGrabber https://svn.eionet.europa.eu/repositories/Zope/trunk/RDFGrabber/
+ * SmallObligations https://svn.eionet.europa.eu/repositories/Zope/trunk/SmallObligations/
  * reportek-converters https://github.com/eea/reportek-converters
 
 
@@ -85,6 +85,14 @@ http://eggshop.eaudeweb.ro/ ::
   $ cd /var/local/bdr/production
   $ . prod-venv/bin/activate
   $ cd zope
+  $ curl -O http://downloads.buildout.org/2/bootstrap.py
+  $ python bootstrap.py
+  $ cp secret.cfg.sample secret.cfg
+  $ vim secret.cfg
+
+Edit secret.cfg and change all the passwords. This file should not be added to Git because it is secret :).
+Run buildout using the production.cfg configuration ::
+
   $ ./bin/buildout -c production.cfg
   $ ./bin/supervisorctl reload 1>/dev/null || ./bin/supervisord
 
@@ -104,6 +112,14 @@ https://svn.eionet.europa.eu/repositories/Zope/trunk/Products.Reportek/ ::
   $ . staging-venv/bin/activate
   $ pip install -r zope/requirements-staging.txt
   $ cd zope
+  $ curl -O http://downloads.buildout.org/2/bootstrap.py
+  $ python bootstrap.py
+  $ cp secret.cfg.sample secret.cfg
+  $ vim secret.cfg
+
+Edit secret.cfg and change all the passwords.
+Run buildout using the staging.cfg configuration::
+
   $ ./bin/buildout -c staging.cfg
   $ ./bin/supervisorctl reload 1>/dev/null || ./bin/supervisord
 
@@ -121,6 +137,14 @@ but has always-checkout = false so that you can control the version of your sour
   $ . devel-venv/bin/activate
   $ pip install -r zope/requirements-dev.txt
   $ cd zope
+  $ curl -O http://downloads.buildout.org/2/bootstrap.py
+  $ python bootstrap.py
+  $ cp secret.cfg.sample secret.cfg
+  $ vim secret.cfg
+
+Edit secret.cfg and change all the passwords.
+Run buildout using the devel.cfg configuration::
+
   $ ./bin/buildout -c devel.cfg
   $ ./bin/instance
 
