@@ -156,7 +156,7 @@ Find out what dir the reportek.converters egg is intalled to and start gunicorn:
 Translation files
 =================
 You will need to update translations from time to time as new i18n:translate tags
-are added to the project. There are 2 places tranaslation tags are picked from:
+are added to the project. There are 2 places translation tags are picked from:
  * the zpt files found in the Product source files
  * the ZODB (either DTMLs or Page Templates)
 
