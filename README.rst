@@ -146,7 +146,7 @@ Edit secret.cfg and change all the passwords.
 Run buildout using the devel.cfg configuration::
 
   $ ./bin/buildout -c devel.cfg
-  $ ./bin/instance
+  $ ./bin/instance fg
 
 Find out what dir the reportek.converters egg is intalled to and start gunicorn::
   * $ cd eggs/reportek.converters-<ver>.egg/Products/reportek.converters/ && ../../../../zope/bin/gunicorn -b localhost:5002 web:app
