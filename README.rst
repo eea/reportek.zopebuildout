@@ -233,11 +233,6 @@ Other people involved in this project are::
 =========
 Resources
 =========
-
-
-Hardware
---------
-
 Minimum requirements:
  * 2048MB RAM
  * 2 CPU 1.8GHz or faster
@@ -249,16 +244,9 @@ Recommended:
  * 8GB hard disk space
 
 
-Software
---------
-
-Any recent Linux version.
-apache2, local ldap server
-
 =====================
 Copyright and license
 =====================
-
 Copyright 2007 European Environment Agency (EEA)
 
 Licensed under the EUPL, Version 1.1 or – as soon they will be approved
