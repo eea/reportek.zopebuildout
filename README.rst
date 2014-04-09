@@ -96,7 +96,13 @@ Run buildout using the production.cfg configuration ::
   $ ./bin/buildout -c production.cfg
   $ ./bin/supervisorctl reload 1>/dev/null || ./bin/supervisord
 
-Check logs/supervisor.log to see if all the procs started
+Check logs/supervisor.log to see if all the procs started or use ./bin/supervisorctl status
+Note that buildout for production and staging will make supervisord and all its services
+start automatically at boot. (crontab @reboot entry). If you do not want such behaviour
+remove supervisor_at_boot line from parts variable in supervisor.cfg file and build again.
+
+Restart with ::
+  $ ./bin/supervisorctl restart all
 
 
 Build staging
