@@ -238,8 +238,8 @@ To delete all documentation::
 
  $ ./bin/clean-docs
 
-Be carefull with *clean-docs* because it remove the whole content of the folder 
-DOCS_PATH.
+**Be carefull with clean-docs because it remove the whole content of the folder 
+DOCS_PATH.**
 
 
 ========
