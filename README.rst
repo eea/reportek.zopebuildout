@@ -225,6 +225,23 @@ The result dir will have the structure of the source dir and beable to substitue
 the language code dirs found in source Products.Reportek/Products/Reportek/locales
 
 
+Generate documentation
+----------------------
+Before generate documentation set variable DOCS_PATH from secret.cfg, to the
+path where the program will save the documentation.
+
+To generate documentation::
+
+ $ ./make-docs
+
+To delete all documentation::
+
+ $ ./bin/clean-docs
+
+Be carefull with *clean-docs* because it remove the whole content of the folder 
+DOCS_PATH.
+
+
 ========
 Contacts
 ========
