@@ -28,12 +28,12 @@ We will need pip to install some python related packages for versions greater
 than the python shipped with RHEL 6.5. We will also need additional repos: PUIAS::
 
   $ sudo bash
-  $ yum install python-pip python27-setuptools subversion git libxml2-devel libxslt-devel munin-node perl-XML-SAX cronie
+  $ yum install python-pip python27-setuptools subversion git libxml2-devel libxslt-devel munin-node perl-XML-SAX cronie gcc python27-devel  openldap-devel libgsasl-devel curl-devel openssl-devel
 
 Reportek-converters system packages::
 
-  $ yum install unrar unzip p7zip mdbtools wv xlhtml libxslt poppler-utils gdal-libs java-1.6.0-openjdk
-  $ easy_install-2.7 virtualenv
+  $ yum install unrar unzip p7zip mdbtools wv xlhtml libxslt poppler-utils gdal-libs java-1.6.0-openjdk gcc python-devel
+  $ easy_install-2.7 virtualenv libssl-dev
 
 Make sure crond (from cronie package) starts automatically on RHEL systems.
 
