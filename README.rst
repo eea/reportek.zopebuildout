@@ -6,6 +6,7 @@ Zope buildout for https://bdr.eionet.europa.eu/
 
 This buildout will create an isolated environment for running BDR Reportek.
 There are three configurations available for running this buildout::
+
  1. production (production)
  2. testing (staging)
  3. development (devel)
@@ -59,7 +60,7 @@ Internal dependencies
 ---------------------
 This buildout depends on us having the following products
 
- * Products.Reportek https://svn.eionet.europa.eu/repositories/Zope/trunk/Products.Reportek/
+ * Products.Reportek https://github.com/eea/Products.Reportek
  * XMLRPCMethod https://svn.eionet.europa.eu/repositories/Zope/trunk/XMLRPCMethod/
  * RDFGrabber https://svn.eionet.europa.eu/repositories/Zope/trunk/RDFGrabber/
  * SmallObligations https://svn.eionet.europa.eu/repositories/Zope/trunk/SmallObligations/
@@ -108,8 +109,8 @@ Restart with ::
 Build staging
 -------------
 This deployment is what runns behind https://bdr-test.eionet.europa.eu/
-Note that staging will user Products.Reportek from sources (through mr.developer)
-https://svn.eionet.europa.eu/repositories/Zope/trunk/Products.Reportek/ ::
+Note that staging will use Products.Reportek from sources (through mr.developer)
+https://github.com/eea/Products.Reportek ::
 
   $ mkdir -p /var/local/bdr/staging
   $ cd /var/local/bdr/staging
@@ -132,9 +133,9 @@ Run buildout using the staging.cfg configuration::
 
 Build devel
 -------------
-Note that devel will user Products.Reportek from sources (through mr.developer)
-https://svn.eionet.europa.eu/repositories/Zope/trunk/Products.Reportek/
-but has always-checkout = false so that you can control the version of your sources::
+Note that devel will use Products.Reportek from sources (through mr.developer)
+https://github.com/eea/Products.Reportek but has always-checkout = false so 
+that you can control the version of your sources::
 
   $ mkdir -p /var/local/bdr/devel
   $ cd /var/local/bdr/devel
@@ -163,6 +164,7 @@ Translation files
 =================
 You will need to update translations from time to time as new i18n:translate tags
 are added to the project. There are 2 places translation tags are picked from:
+
  * the zpt files found in the Product source files
  * the ZODB (either DTMLs or Page Templates)
 
@@ -191,13 +193,14 @@ In order to regenerare translation files got to buzzardNT and::
   - commit changes
 
 Update translations - alternative
---------------------------------
+---------------------------------
 This is done on the developer's machine.
 
  * Get backups from production
  * put them on dev machine on an instalation of bdr
  * use staging or development deployment to have the sources, checkout at a specific date in order to match the egg on production if required
  * follow the steps above with the fs paths of your machine.
+
 Note that you will probably not be able to login not having a local ldap of your own, but that is not required
 
 
