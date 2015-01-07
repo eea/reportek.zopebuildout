@@ -29,7 +29,7 @@ We will need pip to install some python related packages for versions greater
 than the python shipped with RHEL 6.5. We will also need additional repos: PUIAS::
 
   $ sudo bash
-  $ yum install python-pip python27-setuptools subversion git libxml2-devel libxslt-devel munin-node perl-XML-SAX cronie gcc python27-devel  openldap-devel libgsasl-devel curl-devel openssl-devel redis
+  $ yum install python-pip python27-setuptools subversion git libxml2-devel libxslt-devel munin-node perl-XML-SAX cronie gcc python27-devel  openldap-devel libgsasl-devel curl-devel openssl-devel
 
 Reportek-converters system packages::
 
@@ -43,7 +43,7 @@ Debian based systems
 ::
 
   $ sudo bash
-  $ apt-get install python2.7 python2.7-dev python-ldap python-setuptools subversion git libxml2-dev libxslt-dev munin-node libxml-sax-perl python-virtualenv redis-server
+  $ apt-get install python2.7 python2.7-dev python-ldap python-setuptools subversion git libxml2-dev libxslt-dev munin-node libxml-sax-perl python-virtualenv
 
 Reportek-converters system packages::
 
