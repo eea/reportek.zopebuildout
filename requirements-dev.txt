@@ -1,0 +1,4 @@
+-r requirements-staging.txt
+nose==1.1.2
+ipdb==0.8
+ipython==1.1.0
