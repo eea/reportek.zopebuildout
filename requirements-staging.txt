@@ -1,2 +1,1 @@
 -r requirements.txt
-translate-toolkit==1.11.0

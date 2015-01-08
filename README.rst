@@ -1,12 +1,11 @@
 ===============================================
-Zope buildout for https://bdr.eionet.europa.eu/
+Zope buildout for https://mdr.eionet.europa.eu/
 ===============================================
 
 .. contents ::
 
-This buildout will create an isolated environment for running BDR Reportek.
+This buildout will create an isolated environment for running MDR Reportek.
 There are three configurations available for running this buildout::
-
  1. production (production)
  2. testing (staging)
  3. development (devel)
@@ -14,7 +13,7 @@ There are three configurations available for running this buildout::
 
 Project name
 ------------
-The project name is BDR: Bussines Data Repository and it's based on Zope framework.
+The project name is MDR: Mediterranean Data Repository and it's based on Zope framework.
 
 
 Prerequisites - System packages
@@ -29,7 +28,7 @@ We will need pip to install some python related packages for versions greater
 than the python shipped with RHEL 6.5. We will also need additional repos: PUIAS::
 
   $ sudo bash
-  $ yum install python-pip python27-setuptools subversion git libxml2-devel libxslt-devel munin-node perl-XML-SAX cronie gcc python27-devel  openldap-devel libgsasl-devel curl-devel openssl-devel redis
+  $ yum install python-pip python27-setuptools subversion git libxml2-devel libxslt-devel munin-node perl-XML-SAX cronie gcc python27-devel  openldap-devel libgsasl-devel curl-devel openssl-devel
 
 Reportek-converters system packages::
 
@@ -43,7 +42,7 @@ Debian based systems
 ::
 
   $ sudo bash
-  $ apt-get install python2.7 python2.7-dev python-ldap python-setuptools subversion git libxml2-dev libxslt-dev munin-node libxml-sax-perl python-virtualenv redis-server
+  $ apt-get install python2.7 python2.7-dev python-ldap python-setuptools subversion git libxml2-dev libxslt-dev munin-node libxml-sax-perl python-virtualenv
 
 Reportek-converters system packages::
 
@@ -53,7 +52,7 @@ Product directory
 ~~~~~~~~~~~~~~~~~
 ::
 
-  $ mkdir -p /var/local/bdr/production
+  $ mkdir -p /var/local/mdr/production
 
 
 Internal dependencies
@@ -71,8 +70,8 @@ Install Products.Reportek
 -------------------------
 We shall use virtualenv & co for isolated packages::
 
-  $ cd /var/local/bdr/production
-  $ git clone https://github.com/eea/bdr.zopebuildout zope
+  $ cd /var/local/mdr/production
+  $ git clone https://github.com/eea/mdr.zopebuildout zope
   $ virtualenv prod-venv
   $ . ./prod-venv/bin/activate
   $ pip install -r zope/requirements.txt
@@ -83,7 +82,7 @@ Build production
 Note that the production deployment will use Products.Reportek egg from
 http://eggshop.eaudeweb.ro/ ::
 
-  $ cd /var/local/bdr/production
+  $ cd /var/local/mdr/production
   $ . prod-venv/bin/activate
   $ cd zope
   $ curl -O http://downloads.buildout.org/2/bootstrap.py
@@ -108,16 +107,16 @@ Restart with ::
 
 Build staging
 -------------
-This deployment is what runns behind https://bdr-test.eionet.europa.eu/
-Note that staging will use Products.Reportek from sources (through mr.developer)
-https://github.com/eea/Products.Reportek ::
+This deployment is what runnings behind https://mdr-test.eionet.europa.eu/
+Note that staging will user Products.Reportek from sources (through mr.developer)
+https://svn.eionet.europa.eu/repositories/Zope/trunk/Products.Reportek/ ::
 
-  $ mkdir -p /var/local/bdr/staging
-  $ cd /var/local/bdr/staging
-  $ git clone https://github.com/eea/bdr.zopebuildout zope
+  $ mkdir -p /var/local/mdr/staging
+  $ cd /var/local/mdr/staging
+  $ git clone https://github.com/eea/mdr.zopebuildout zope
   $ virtualenv staging-venv
   $ . staging-venv/bin/activate
-  $ pip install -r zope/requirements-staging.txt
+  $ pip install -r zope/requirements.txt
   $ cd zope
   $ curl -O http://downloads.buildout.org/2/bootstrap.py
   $ python bootstrap.py
@@ -133,13 +132,13 @@ Run buildout using the staging.cfg configuration::
 
 Build devel
 -------------
-Note that devel will use Products.Reportek from sources (through mr.developer)
-https://github.com/eea/Products.Reportek but has always-checkout = false so 
-that you can control the version of your sources::
+Note that devel will user Products.Reportek from sources (through mr.developer)
+https://svn.eionet.europa.eu/repositories/Zope/trunk/Products.Reportek/
+but has always-checkout = false so that you can control the version of your sources::
 
-  $ mkdir -p /var/local/bdr/devel
-  $ cd /var/local/bdr/devel
-  $ git clone https://github.com/eea/bdr.zopebuildout zope
+  $ mkdir -p /var/local/mdr/devel
+  $ cd /var/local/mdr/devel
+  $ git clone https://github.com/eea/mdr.zopebuildout zope
   $ virtualenv devel-venv
   $ . devel-venv/bin/activate
   $ pip install -r zope/requirements-dev.txt
@@ -159,92 +158,6 @@ Find out what dir the reportek.converters egg is intalled to and start gunicorn:
   * $ cd eggs/reportek.converters-<ver>.egg/Products/reportek.converters/ && ../../../../zope/bin/gunicorn -b localhost:5002 web:app
 
 
-=================
-Translation files
-=================
-You will need to update translations from time to time as new i18n:translate tags
-are added to the project. There are 2 places translation tags are picked from:
-
- * the zpt files found in the Product source files
- * the ZODB (either DTMLs or Page Templates)
-
-
-Updating translations
----------------------
-
-Updating po files will assume that you have acces to the Products.Reportek source
-So will we do this from staging. If for any reason there are translation tags in
-the production ZODB that are not in the bdr-test then you need to find a way
-to import them in the bdr-test ZODB.
-
-In order to regenerare translation files got to buzzardNT and::
-
-  $ sudo su - zope
-  $ cd /var/local/bdr/staging/zope
-  $ ./bin/supervisorctl stop instance
-  $ cd src/Products.Reportek/extras
-  $ /var/local/bdr/staging/zope/bin/instance debug
-  >>> import zodb_scripts
-  >>> zodb_scripts.dump_code(app)
-  >>> CTRL+d
-  $ /var/local/bdr/staging/zope/bin/supervisorctl start instance
-  $ cd /var/local/bdr/staging/zope/src/Products.Reportek/Products/Reportek/locales
-  $ ./update.sh [path/to/i18ndude - default buzzardNT staging deployment bin dir]
-  - commit changes
-
-Update translations - alternative
----------------------------------
-This is done on the developer's machine.
-
- * Get backups from production
- * put them on dev machine on an instalation of bdr
- * use staging or development deployment to have the sources, checkout at a specific date in order to match the egg on production if required
- * follow the steps above with the fs paths of your machine.
-
-Note that you will probably not be able to login not having a local ldap of your own, but that is not required
-
-
-Generate xliff files
---------------------
-::
-
-  $ sudo su - zope
-  $ cd /var/local/bdr/staging/zope/src/
-  $ ./Products.Reportek/Products/Reportek/locales/generate-xliff.sh <name of output dir>
-
-The output dir must not already exist
-The result will be an archive <name of output dir>.tar.gz, on the same level
-with the designated dir output dir. Its structure will mimic the one of locales dir
-
-
-Generate po from xlf
---------------------
-Start with the result of upacking an arhive like the one obtained at the
-previous step::
-
-  $ xliff2po locales.xlf.dir locales.po.dir
-
-The result dir will have the structure of the source dir and beable to substitue
-the language code dirs found in source Products.Reportek/Products/Reportek/locales
-
-
-Generate documentation
-----------------------
-Before generate documentation set variable DOCS_PATH from secret.cfg, to the
-path where the program will save the documentation.
-
-To generate documentation::
-
- $ ./make-docs
-
-To delete all documentation::
-
- $ ./bin/clean-docs
-
-**Be carefull with clean-docs because it removes the whole content of the folder 
-DOCS_PATH.**
-
-
 ========
 Contacts
 ========
@@ -257,12 +170,12 @@ Other people involved in this project are::
 
 
 =========
-Resources
+Hardware
 =========
 Minimum requirements:
- * 2048MB RAM
- * 2 CPU 1.8GHz or faster
- * 4GB hard disk space
+ * 1024MB RAM
+ * 1 CPU 1.8GHz or faster
+ * 5GB hard disk space
 
 Recommended:
  * 4096MB RAM
