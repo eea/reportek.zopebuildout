@@ -1,0 +1,11 @@
+--- a/Products.ZCatalog-2.13.23-py2.7.egg/Products/ZCatalog/CatalogAwareness.py	2014-11-28 17:46:32.791027624 +0200
++++ b/Products.ZCatalog-2.13.23-py2.7.egg/Products/ZCatalog/CatalogAwareness.py	2014-11-28 17:46:45.422484553 +0200
+@@ -108,7 +108,7 @@
+             url = self.absolute_url()
+         type, uri = ftype(url)
+         host, uri = fhost(uri)
+-        script_name = self.REQUEST['SCRIPT_NAME']
++        script_name = self.REQUEST['SCRIPT_NAME'] if hasattr(self, 'REQUEST') else None
+         if script_name:
+             uri = filter(None, uri.split(script_name))[0]
+         if not uri:
