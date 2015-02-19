@@ -1,7 +1,7 @@
---- a/Products.PluggableAuthService-1.8.0-py2.7.egg/Products/PluggableAuthService/PluggableAuthService.py        2014-12-11 14:25:03.598652112 +0100
-+++ b/Products.PluggableAuthService-1.8.0-py2.7.egg/Products/PluggableAuthService/PluggableAuthService.py 2014-12-11 14:25:19.716677050 +0100
-@@ -551,11 +551,9 @@
-
+--- a/Products.PluggableAuthService-1.10.0-py2.7.egg/Products/PluggableAuthService/PluggableAuthService.py	2015-02-19 13:33:05.831739815 +0200
++++ b/Products.PluggableAuthService-1.10.0-py2.7.egg/Products/PluggableAuthService/PluggableAuthService.py	2015-02-19 13:33:45.329932042 +0200
+@@ -603,11 +603,9 @@
+ 
              try:
                  credentials = extractor.extractCredentials( request )
 -            except _SWALLOWABLE_PLUGIN_EXCEPTIONS:
@@ -12,5 +12,5 @@
 -                            )
 +                logger.warning( 'ExtractionPlugin %s failed (%s)' % (extractor_id, str(e)))
                  continue
-
+ 
              if credentials:
