@@ -9,7 +9,8 @@ There are three configurations available for running this buildout::
 
  1. production (production)
  2. testing (staging)
- 3. development (devel)
+ 3. testing dev (staging_dev)
+ 4. development (devel)
 
 
 Project name
@@ -86,7 +87,7 @@ http://eggshop.eaudeweb.ro/ ::
   $ cd /var/local/cdr/production
   $ . prod-venv/bin/activate
   $ cd zope
-  $ curl -O http://downloads.buildout.org/2/bootstrap.py
+  $ curl -L -O http://downloads.buildout.org/2/bootstrap.py
   $ python bootstrap.py
   $ cp secret.cfg.sample secret.cfg
   $ vim secret.cfg
