@@ -17,7 +17,7 @@ PREFIX=${parts.buildout.directory}
 INSTANCES=({% for i in range(1,3) %}{% with INSTANCE='instance'+str(i) %}{% if parts[INSTANCE]['recipe'] %}"$INSTANCE" {% end %}{% end %}{% end %})
 
 PID_ZEO=$( cat "$$PREFIX/var/zeoserver.pid" 2>/dev/null )
-PID_POUND=$( cat "$$PREFIX/parts/poundconfig/var/pound.pid" 2>/dev/null )
+PID_POUND=$( cat "$$PREFIX/parts/pound/var/pound.pid" 2>/dev/null )
 
 
 test -f $$PREFIX/bin/zeoserver || exit 5
