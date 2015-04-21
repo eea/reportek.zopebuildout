@@ -6,10 +6,9 @@
 # Author: Olimpiu Rob olimpiu.rob@gmail.com
 #
 # chkconfig: 2345 13 87
-# description: This script will start all required services for the datare gistry\
+# description: This script will start all required services for the data registry\
 #   portal.
 
-# . /etc/init.d/functions
 
 RETVAL=0
 SUCMD='su -s /bin/bash ${parts.configuration['effective-user']} -c'
@@ -111,7 +110,7 @@ status_all() {
         echo "Pound not running"
     fi
     if pid_exists $$PID_CONVERTERS; then
-        echo "Converters seem to be running"
+        echo "Converters seem to be running pid=$$PID_CONVERTERS"
     else
         echo "Converters not running"
     fi
