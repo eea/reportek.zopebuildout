@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# restart-portal        This shell script takes care of starting and stopping
+# portalctl        This shell script takes care of starting and stopping
 #                       the data registry portal
 #
 # Author: Olimpiu Rob olimpiu.rob@gmail.com
