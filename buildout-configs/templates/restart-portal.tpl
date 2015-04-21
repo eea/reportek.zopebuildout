@@ -18,6 +18,7 @@ INSTANCES=({% for i in range(1,3) %}{% with INSTANCE='instance'+str(i) %}{% if p
 
 PID_ZEO=$( cat "$$PREFIX/var/zeoserver.pid" 2>/dev/null )
 PID_POUND=$( cat "$$PREFIX/parts/pound/var/pound.pid" 2>/dev/null )
+PID_CONVERTERS=$( cat "$$PREFIX/var/converters.pid" 2>/dev/null )
 
 
 test -f $$PREFIX/bin/zeoserver || exit 5
@@ -52,6 +53,12 @@ start_all() {
         $$SUCMD "$$PREFIX/bin/poundctl start"
         echo "Pound started"
     fi
+    if pid_exists $$PID_CONVERTERS; then
+        echo "Pound not started"
+    else
+        $$SUCMD "$$PREFIX/bin/gunicorn -b ${parts.gunicorn['address']}:${parts.gunicorn['port']} ${parts.gunicorn['app_module']} --timeout 300 -p $$PREFIX/var/converters.pid -D --chdir=${parts.buildout['eggs-directory']}/reportek.converters.egg/Products/reportek.converters/"
+        echo "Converters started"
+    fi
 }
 
 stop_all() {
@@ -76,29 +83,37 @@ stop_all() {
     else
         echo "Zeoserver not stopped"
     fi
+    if pid_exists $$PID_CONVERTERS; then
+        $$SUCMD "/bin/kill -s TERM $$PID_CONVERTERS"
+        echo "Converters stopped"
+    else
+        echo "Converters not stopped"
+    fi
 }
 
 status_all() {
     if pid_exists $$PID_ZEO; then
-        $$PREFIX/bin/zeoserver status
-        echo "Zeosever"
+        echo "Zeosever `$$SUCMD "$$PREFIX/bin/zeoserver status"`"
     else
         echo "Zeoserver"
     fi
     for name in "$${INSTANCES[@]}"; do
         PID_ZOPE=$( cat "$$PREFIX/var/$$name.pid" 2>/dev/null )
         if pid_exists $$PID_ZOPE; then
-            echo "Zope $$name"
-            $$PREFIX/bin/$$name status
+            echo "Zope $$name `$$SUCMD "$$PREFIX/bin/$$name status"`"
         else
             echo "Zope $$name"
         fi
     done
     if pid_exists $$PID_POUND; then
-        $$SUCMD "$$PREFIX/bin/poundctl status"
-        echo "Pound"
+        echo "Pound `$$SUCMD "$$PREFIX/bin/poundctl status"`"
     else
-        echo "Pound"
+        echo "Pound not running"
+    fi
+    if pid_exists $$PID_CONVERTERS; then
+        echo "Converters seem to be running"
+    else
+        echo "Converters not running"
     fi
 }
 
