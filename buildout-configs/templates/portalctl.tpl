@@ -15,23 +15,25 @@ if [ -z "$$PYTHON" ]; then
   PYTHON="/usr/bin/env python2.7"
 fi
 
-# Make sure python is 2.7 or later
+
+# Make sure python is 2.7 or later. If we have software collections python27 and
+# system python27, use the one from software collections by default
 PYTHON_OK=`$$PYTHON -c 'import sys
 print (sys.version_info >= (2, 7) and "1" or "0")' 2> /dev/null`
 
-SCL_PKG='python27'
+SCL_PKG="python27"
+OPTS=
 
-if [ ! "$$PYTHON_OK" = '1' ];then
+if [ -f /usr/bin/scl ]; then
     TEST_SCL_PY=`/usr/bin/scl --list | grep -q $$SCL_PKG`
-    if [ ! -f /usr/bin/scl ] || [ ! TEST_SCL_PY ];then
-        echo "Python 2.7 or later is required"
-        exit 0
-    else
+    if [ TEST_SCL_PY ]; then
         OPTS="/usr/bin/scl enable $$SCL_PKG --"
     fi
-else
-    OPTS=''
+elif [ ! "$$PYTHON_OK" = '1' ]; then
+    echo "Python 2.7 or later is required"
+    exit 0
 fi
+
 SUCMD='su -s /bin/bash ${parts.configuration['effective-user']} -c'
 PREFIX=${parts.buildout.directory}
 INSTANCES=({% for i in range(1,3) %}{% with INSTANCE='instance'+str(i) %}{% if parts[INSTANCE]['recipe'] %}"$INSTANCE" {% end %}{% end %}{% end %})
