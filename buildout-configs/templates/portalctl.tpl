@@ -26,7 +26,7 @@ OPTS=
 
 if [ -f /usr/bin/scl ]; then
     TEST_SCL_PY=`/usr/bin/scl --list | grep -q $$SCL_PKG`
-    if [ TEST_SCL_PY ]; then
+    if [ -n "$TEST_SCL_PY" ]; then
         OPTS="/usr/bin/scl enable $$SCL_PKG --"
     fi
 elif [ ! "$$PYTHON_OK" = '1' ]; then
