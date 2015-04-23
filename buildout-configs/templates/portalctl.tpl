@@ -11,6 +11,27 @@
 
 
 RETVAL=0
+if [ -z "$$PYTHON" ]; then
+  PYTHON="/usr/bin/env python2.7"
+fi
+
+# Make sure python is 2.7 or later
+PYTHON_OK=`$$PYTHON -c 'import sys
+print (sys.version_info >= (2, 7) and "1" or "0")' 2> /dev/null`
+
+SCL_PKG='python27'
+
+if [ ! "$$PYTHON_OK" = '1' ];then
+    TEST_SCL_PY=`/usr/bin/scl --list | grep -q $$SCL_PKG`
+    if [ ! -f /usr/bin/scl ] || [ ! TEST_SCL_PY ];then
+        echo "Python 2.7 or later is required"
+        exit 0
+    else
+        OPTS="/usr/bin/scl enable $$SCL_PKG --"
+    fi
+else
+    OPTS=''
+fi
 SUCMD='su -s /bin/bash ${parts.configuration['effective-user']} -c'
 PREFIX=${parts.buildout.directory}
 INSTANCES=({% for i in range(1,3) %}{% with INSTANCE='instance'+str(i) %}{% if parts[INSTANCE]['recipe'] %}"$INSTANCE" {% end %}{% end %}{% end %})
@@ -34,7 +55,7 @@ start_all() {
     if pid_exists $$PID_ZEO; then
         echo "Zeoserver not started"
     else
-        $$SUCMD "$$PREFIX/bin/zeoserver start"
+        $$SUCMD "$$OPTS $$PREFIX/bin/zeoserver start"
         echo "Zeosever started"
     fi
     for name in "$${INSTANCES[@]}"; do
@@ -42,27 +63,27 @@ start_all() {
         if pid_exists $$PID_ZOPE; then
             echo "Zope $$name not started"
         else
-            $$SUCMD "$$PREFIX/bin/$$name start"
+            $$SUCMD "$$OPTS $$PREFIX/bin/$$name start"
             echo "Zope $$name started"
         fi
     done
     if pid_exists $$PID_POUND; then
         echo "Pound not started"
     else
-        $$SUCMD "$$PREFIX/bin/poundctl start"
+        $$SUCMD "$$OPTS $$PREFIX/bin/poundctl start"
         echo "Pound started"
     fi
     if pid_exists $$PID_CONVERTERS; then
         echo "Pound not started"
     else
-        $$SUCMD "$$PREFIX/bin/gunicorn -b ${parts.gunicorn['address']}:${parts.gunicorn['port']} ${parts.gunicorn['app_module']} --timeout 300 -p $$PREFIX/var/converters.pid -D --chdir=${parts.buildout['eggs-directory']}/reportek.converters.egg/Products/reportek.converters/"
+        $$SUCMD "$$OPTS $$PREFIX/bin/gunicorn -b ${parts.gunicorn['address']}:${parts.gunicorn['port']} ${parts.gunicorn['app_module']} --timeout 300 -p $$PREFIX/var/converters.pid -D --chdir=${parts.buildout['eggs-directory']}/reportek.converters.egg/Products/reportek.converters/"
         echo "Converters started"
     fi
 }
 
 stop_all() {
     if pid_exists $$PID_POUND; then
-        $$SUCMD "$$PREFIX/bin/poundctl stop"
+        $$SUCMD "$$OPTS $$PREFIX/bin/poundctl stop"
         echo "Pound stopped"
     else
         echo "Pound not stopped"
@@ -70,14 +91,14 @@ stop_all() {
     for name in "$${INSTANCES[@]}"; do
         PID_ZOPE=$( cat "$$PREFIX/var/$$name.pid" 2>/dev/null )
         if pid_exists $$PID_ZOPE; then
-            $$SUCMD "$$PREFIX/bin/$$name stop"
+            $$SUCMD "$$OPTS $$PREFIX/bin/$$name stop"
             echo "Zope $$name stopped"
         else
             echo "Zope $$name not stopped"
         fi
     done
     if pid_exists $$PID_ZEO; then
-        $$SUCMD "$$PREFIX/bin/zeoserver stop"
+        $$SUCMD "$$OPTS $$PREFIX/bin/zeoserver stop"
         echo "Zeosever stopped"
     else
         echo "Zeoserver not stopped"
@@ -92,20 +113,20 @@ stop_all() {
 
 status_all() {
     if pid_exists $$PID_ZEO; then
-        echo "Zeosever `$$SUCMD "$$PREFIX/bin/zeoserver status"`"
+        echo "Zeosever `$$OPTS $$SUCMD "$$PREFIX/bin/zeoserver status"`"
     else
         echo "Zeoserver"
     fi
     for name in "$${INSTANCES[@]}"; do
         PID_ZOPE=$( cat "$$PREFIX/var/$$name.pid" 2>/dev/null )
         if pid_exists $$PID_ZOPE; then
-            echo "Zope $$name `$$SUCMD "$$PREFIX/bin/$$name status"`"
+            echo "Zope $$name `$$OPTS $$SUCMD "$$PREFIX/bin/$$name status"`"
         else
             echo "Zope $$name"
         fi
     done
     if pid_exists $$PID_POUND; then
-        echo "Pound `$$SUCMD "$$PREFIX/bin/poundctl status"`"
+        echo "Pound `$$SUCMD "$$OPTS $$PREFIX/bin/poundctl status"`"
     else
         echo "Pound not running"
     fi
