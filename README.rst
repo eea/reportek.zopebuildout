@@ -1,10 +1,10 @@
 ===============================================
-Zope buildout for https://bdr.eionet.europa.eu/
+Zope buildout for https://cdr.eionet.europa.eu/
 ===============================================
 
 .. contents ::
 
-This buildout will create an isolated environment for running BDR Reportek.
+This buildout will create an isolated environment for running CDR Reportek.
 There are three configurations available for running this buildout::
 
  1. production (production)
@@ -15,7 +15,7 @@ There are three configurations available for running this buildout::
 
 Project name
 ------------
-The project name is BDR: Bussines Data Repository and it's based on Zope framework.
+The project name is CDR: Central Data Repository and it's based on Zope framework.
 
 
 Prerequisites - System packages
@@ -54,7 +54,7 @@ Product directory
 ~~~~~~~~~~~~~~~~~
 ::
 
-  $ mkdir -p /var/local/bdr/production
+  $ mkdir -p /var/local/cdr/production
 
 
 Internal dependencies
@@ -72,8 +72,8 @@ Install Products.Reportek
 -------------------------
 We shall use virtualenv & co for isolated packages::
 
-  $ cd /var/local/bdr/production
-  $ git clone https://github.com/eea/bdr.zopebuildout zope
+  $ cd /var/local/cdr/production
+  $ git clone https://github.com/eea/cdr.zopebuildout zope
   $ virtualenv prod-venv
   $ . ./prod-venv/bin/activate
   $ pip install -r zope/requirements.txt
@@ -84,7 +84,7 @@ Build production
 Note that the production deployment will use Products.Reportek egg from
 http://eggshop.eaudeweb.ro/ ::
 
-  $ cd /var/local/bdr/production
+  $ cd /var/local/cdr/production
   $ . prod-venv/bin/activate
   $ cd zope
   $ curl -L -O http://downloads.buildout.org/2/bootstrap.py
@@ -109,13 +109,13 @@ Restart with ::
 
 Build staging
 -------------
-This deployment is what runns behind https://bdr-test.eionet.europa.eu/
+This deployment is what runns behind https://cdr-test.eionet.europa.eu/
 Note that staging will use Products.Reportek from sources (through mr.developer)
 https://github.com/eea/Products.Reportek ::
 
-  $ mkdir -p /var/local/bdr/staging
-  $ cd /var/local/bdr/staging
-  $ git clone https://github.com/eea/bdr.zopebuildout zope
+  $ mkdir -p /var/local/cdr/staging
+  $ cd /var/local/cdr/staging
+  $ git clone https://github.com/eea/cdr.zopebuildout zope
   $ virtualenv staging-venv
   $ . staging-venv/bin/activate
   $ pip install -r zope/requirements-staging.txt
@@ -138,9 +138,9 @@ Note that devel will use Products.Reportek from sources (through mr.developer)
 https://github.com/eea/Products.Reportek but has always-checkout = false so 
 that you can control the version of your sources::
 
-  $ mkdir -p /var/local/bdr/devel
-  $ cd /var/local/bdr/devel
-  $ git clone https://github.com/eea/bdr.zopebuildout zope
+  $ mkdir -p /var/local/cdr/devel
+  $ cd /var/local/cdr/devel
+  $ git clone https://github.com/eea/cdr.zopebuildout zope
   $ virtualenv devel-venv
   $ . devel-venv/bin/activate
   $ pip install -r zope/requirements-dev.txt
@@ -158,75 +158,6 @@ Run buildout using the devel.cfg configuration::
 
 Find out what dir the reportek.converters egg is intalled to and start gunicorn::
   * $ cd eggs/reportek.converters-<ver>.egg/Products/reportek.converters/ && ../../../../zope/bin/gunicorn -b localhost:5002 web:app
-
-
-=================
-Translation files
-=================
-You will need to update translations from time to time as new i18n:translate tags
-are added to the project. There are 2 places translation tags are picked from:
-
- * the zpt files found in the Product source files
- * the ZODB (either DTMLs or Page Templates)
-
-
-Updating translations
----------------------
-
-Updating po files will assume that you have acces to the Products.Reportek source
-So will we do this from staging. If for any reason there are translation tags in
-the production ZODB that are not in the bdr-test then you need to find a way
-to import them in the bdr-test ZODB.
-
-In order to regenerare translation files got to buzzardNT and::
-
-  $ sudo su - zope
-  $ cd /var/local/bdr/staging/zope
-  $ ./bin/supervisorctl stop instance
-  $ cd src/Products.Reportek/extras
-  $ /var/local/bdr/staging/zope/bin/instance debug
-  >>> import zodb_scripts
-  >>> zodb_scripts.dump_code(app)
-  >>> CTRL+d
-  $ /var/local/bdr/staging/zope/bin/supervisorctl start instance
-  $ cd /var/local/bdr/staging/zope/src/Products.Reportek/Products/Reportek/locales
-  $ ./update.sh [path/to/i18ndude - default buzzardNT staging deployment bin dir]
-  - commit changes
-
-Update translations - alternative
----------------------------------
-This is done on the developer's machine.
-
- * Get backups from production
- * put them on dev machine on an instalation of bdr
- * use staging or development deployment to have the sources, checkout at a specific date in order to match the egg on production if required
- * follow the steps above with the fs paths of your machine.
-
-Note that you will probably not be able to login not having a local ldap of your own, but that is not required
-
-
-Generate xliff files
---------------------
-::
-
-  $ sudo su - zope
-  $ cd /var/local/bdr/staging/zope/src/
-  $ ./Products.Reportek/Products/Reportek/locales/generate-xliff.sh <name of output dir>
-
-The output dir must not already exist
-The result will be an archive <name of output dir>.tar.gz, on the same level
-with the designated dir output dir. Its structure will mimic the one of locales dir
-
-
-Generate po from xlf
---------------------
-Start with the result of upacking an arhive like the one obtained at the
-previous step::
-
-  $ xliff2po locales.xlf.dir locales.po.dir
-
-The result dir will have the structure of the source dir and beable to substitue
-the language code dirs found in source Products.Reportek/Products/Reportek/locales
 
 
 Generate documentation
