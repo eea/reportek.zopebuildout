@@ -32,7 +32,7 @@ CentOS                 dependency for
 ====================   =============================
 apr-util-devel         buildout
 cronie                 buildout
-curl-devel             sparql-client and pycurl2
+curl-devel             buildout
 cyrus-sasl-devel       OpenLDAP
 gcc                    buildout
 gcc-c++                buildout
