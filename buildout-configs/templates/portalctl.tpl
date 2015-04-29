@@ -25,7 +25,7 @@ SCL_PKG="python27"
 OPTS=
 
 if [ -f /usr/bin/scl ]; then
-    TEST_SCL_PY=`/usr/bin/scl --list | grep -q $$SCL_PKG`
+    TEST_SCL_PY=`/usr/bin/scl --list | grep $$SCL_PKG`
     if [ -n "$$TEST_SCL_PY" ]; then
         OPTS="/usr/bin/scl enable $$SCL_PKG --"
     fi
