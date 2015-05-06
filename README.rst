@@ -142,10 +142,10 @@ Run buildout using the production.cfg configuration ::
 For the application stack to be restarted when server reboot, the system administrator should add under /etc/init.d the script from /var/local/bdr/production/etc/rc.d/bdrctl, e.g.::
 
   $ cd /var/local/bdr/production/etc/rc.d
-  $ ln -s `pwd`/bdrctl /etc/init.d/bdrctl
-  $ chkconfig --add bdrctl
-  $ chkconfig bdrctl on
-  $ service bdrctl start
+  $ sudo ln -s `pwd`/bdrctl /etc/init.d/bdrctl
+  $ sudo chkconfig --add bdrctl
+  $ sudo chkconfig bdrctl on
+  $ sudo service bdrctl start
 
 Check the status and see if all the procs started with ::
 
@@ -189,10 +189,10 @@ Run buildout using the staging.cfg configuration::
 For the application stack to be restarted when server reboot, the system administrator should add under /etc/init.d the script from /var/local/bdr/staging/etc/rc.d/bdr-testctl, e.g.::
 
   $ cd /var/local/bdr/staging/etc/rc.d
-  $ ln -s `pwd`/bdr-testctl /etc/init.d/bdr-testctl
-  $ chkconfig --add bdr-testctl
-  $ chkconfig bdr-testctl on
-  $ service bdr-testctl start
+  $ sudo ln -s `pwd`/bdr-testctl /etc/init.d/bdr-testctl
+  $ sudo chkconfig --add bdr-testctl
+  $ sudo chkconfig bdr-testctl on
+  $ sudo service bdr-testctl start
 
 Check the status and see if all the procs started with ::
 
