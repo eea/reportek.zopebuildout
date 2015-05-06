@@ -143,10 +143,10 @@ Run buildout using the production.cfg configuration ::
 For the application stack to be restarted when server reboot, the system administrator should add under /etc/init.d the script from /var/local/cdr/production/etc/rc.d/cdrctl, e.g.::
 
   $ cd /var/local/cdr/production/etc/rc.d
-  $ ln -s `pwd`/cdrctl /etc/init.d/cdrctl
-  $ chkconfig --add cdrctl
-  $ chkconfig cdrctl on
-  $ service cdrctl start
+  $ sudo ln -s `pwd`/cdrctl /etc/init.d/cdrctl
+  $ sudo chkconfig --add cdrctl
+  $ sudo chkconfig cdrctl on
+  $ sudo service cdrctl start
 
 Check the status and see if all the procs started with ::
 
@@ -189,11 +189,11 @@ Run buildout using the staging.cfg configuration::
 
 For the application stack to be restarted when server reboot, the system administrator should add under /etc/init.d the script from /var/local/cdr/staging/etc/rc.d/cdrtestctl, e.g.::
 
-  $ cd /var/local/cdr/staging/etc/rc.d
-  $ ln -s `pwd`/cdrtestctl /etc/init.d/cdrtestctl
-  $ chkconfig --add cdrtestctl
-  $ chkconfig cdrtestctl on
-  $ service cdrtestctl start
+  $ sudo cd /var/local/cdr/staging/etc/rc.d
+  $ sudo ln -s `pwd`/cdrtestctl /etc/init.d/cdrtestctl
+  $ sudo chkconfig --add cdrtestctl
+  $ sudo chkconfig cdrtestctl on
+  $ sudo service cdrtestctl start
 
 Check the status and see if all the procs started with ::
 
