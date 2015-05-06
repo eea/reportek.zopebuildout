@@ -140,10 +140,10 @@ Run buildout using the production.cfg configuration ::
 For the application stack to be restarted when server reboot, the system administrator should add under /etc/init.d the script from /var/local/mdr/production/etc/rc.d/mdrctl, e.g.::
 
   $ cd /var/local/mdr/production/etc/rc.d
-  $ ln -s `pwd`/mdrctl /etc/init.d/mdrctl
-  $ chkconfig --add mdrctl
-  $ chkconfig mdrctl on
-  $ service mdrctl start
+  $ sudo ln -s `pwd`/mdrctl /etc/init.d/mdrctl
+  $ sudo chkconfig --add mdrctl
+  $ sudo chkconfig mdrctl on
+  $ sudo service mdrctl start
 
 Check the status and see if all the procs started with ::
 
@@ -187,10 +187,10 @@ Run buildout using the staging.cfg configuration::
 For the application stack to be restarted when server reboot, the system administrator should add under /etc/init.d the script from /var/local/mdr/staging/etc/rc.d/mdr-testctl, e.g.::
 
   $ cd /var/local/mdr/staging/etc/rc.d
-  $ ln -s `pwd`/mdr-testctl /etc/init.d/mdr-testctl
-  $ chkconfig --add mdr-testctl
-  $ chkconfig mdr-testctl on
-  $ service mdr-testctl start
+  $ sudo ln -s `pwd`/mdr-testctl /etc/init.d/mdr-testctl
+  $ sudo chkconfig --add mdr-testctl
+  $ sudo chkconfig mdr-testctl on
+  $ sudo service mdr-testctl start
 
 Check the status and see if all the procs started with ::
 
