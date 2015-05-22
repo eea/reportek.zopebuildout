@@ -225,7 +225,7 @@ that you can control the version of your sources::
   $ cd zope
   $ curl -L -O http://downloads.buildout.org/2/bootstrap.py
   $ python bootstrap.py
-  $ cp secret.cfg.sample secret.cfg
+  $ cp buildout-configs/secret.cfg.sample buildout-configs/secret.cfg
   $ vim secret.cfg
 
 Edit secret.cfg and change all the passwords.
