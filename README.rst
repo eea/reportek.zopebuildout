@@ -132,7 +132,7 @@ http://eggshop.eaudeweb.ro/ ::
   $ cd zope
   $ curl -L -O http://downloads.buildout.org/2/bootstrap.py
   $ python bootstrap.py
-  $ cp secret.cfg.sample secret.cfg
+  $ cp buildout-configs/secret.cfg.sample buildout-configs/secret.cfg
   $ vim secret.cfg
 
 Edit secret.cfg and change all the passwords. This file should not be added to Git because it is secret :).
@@ -179,7 +179,7 @@ https://github.com/eea/Products.Reportek ::
   $ cd zope
   $ curl -L -O http://downloads.buildout.org/2/bootstrap.py
   $ python bootstrap.py
-  $ cp secret.cfg.sample secret.cfg
+  $ cp buildout-configs/secret.cfg.sample buildout-configs/secret.cfg
   $ vim secret.cfg
 
 Edit secret.cfg and change all the passwords.
@@ -226,7 +226,7 @@ that you can control the version of your sources::
   $ cd zope
   $ curl -L -O http://downloads.buildout.org/2/bootstrap.py
   $ python bootstrap.py
-  $ cp secret.cfg.sample secret.cfg
+  $ cp buildout-configs/secret.cfg.sample buildout-configs/secret.cfg
   $ vim secret.cfg
 
 Edit secret.cfg and change all the passwords.
