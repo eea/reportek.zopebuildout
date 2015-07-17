@@ -58,7 +58,7 @@ start_all() {
         echo "Zeoserver not started"
     else
         $$SUCMD "$$OPTS $$PREFIX/bin/zeoserver start"
-        echo "Zeosever started"
+        echo "Zeoserver started"
     fi
     for name in "$${INSTANCES[@]}"; do
         PID_ZOPE=$( cat "$$PREFIX/var/$$name.pid" 2>/dev/null )
@@ -101,7 +101,7 @@ stop_all() {
     done
     if pid_exists $$PID_ZEO; then
         $$SUCMD "$$OPTS $$PREFIX/bin/zeoserver stop"
-        echo "Zeosever stopped"
+        echo "Zeoserver stopped"
     else
         echo "Zeoserver not stopped"
     fi
@@ -115,7 +115,7 @@ stop_all() {
 
 status_all() {
     if pid_exists $$PID_ZEO; then
-        echo "Zeosever `$$OPTS $$SUCMD "$$PREFIX/bin/zeoserver status"`"
+        echo "Zeoserver `$$OPTS $$SUCMD "$$PREFIX/bin/zeoserver status"`"
     else
         echo "Zeoserver"
     fi
