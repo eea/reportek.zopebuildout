@@ -123,18 +123,19 @@ We shall use virtualenv & co for isolated packages::
 
 Build production
 ----------------
-Note that the production deployment will use Products.Reportek egg from
-http://eggshop.eaudeweb.ro/ ::
+Note that production will use Products.Reportek from sources (through mr.developer)
+https://github.com/eea/Products.Reportek ::
 
   $ cd /var/local/bdr/production
   $ . prod-venv/bin/activate
-  $ cd zope
-  $ curl -L -O http://downloads.buildout.org/2/bootstrap.py
-  $ python bootstrap.py
-  $ cp buildout-configs/secret.cfg.sample buildout-configs/secret.cfg
-  $ vim secret.cfg
 
 Edit secret.cfg and change all the passwords. This file should not be added to Git because it is secret :).
+
+  $ cd zope
+  $ cp buildout-configs/secret.cfg.sample buildout-configs/secret.cfg
+  $ vim secret.cfg
+  $ ./install.sh production.cfg
+
 Run buildout using the production.cfg configuration ::
 
   $ ./bin/buildout -c production.cfg
@@ -165,7 +166,7 @@ or for systemd ::
 
 Build staging
 -------------
-This deployment is what runns behind https://bdr-test.eionet.europa.eu/
+This deployment is what runs behind https://bdr-test.eionet.europa.eu/
 Note that staging will use Products.Reportek from sources (through mr.developer)
 https://github.com/eea/Products.Reportek ::
 
@@ -175,13 +176,14 @@ https://github.com/eea/Products.Reportek ::
   $ virtualenv staging-venv
   $ . staging-venv/bin/activate
   $ pip install -r zope/requirements-staging.txt
+
+Edit secret.cfg and change all the passwords. This file should not be added to Git because it is secret :).
+
   $ cd zope
-  $ curl -L -O http://downloads.buildout.org/2/bootstrap.py
-  $ python bootstrap.py
   $ cp buildout-configs/secret.cfg.sample buildout-configs/secret.cfg
   $ vim secret.cfg
+  $ ./install.sh staging.cfg
 
-Edit secret.cfg and change all the passwords.
 Run buildout using the staging.cfg configuration::
 
   $ ./bin/buildout -c staging.cfg
@@ -222,13 +224,14 @@ that you can control the version of your sources::
   $ virtualenv devel-venv
   $ . devel-venv/bin/activate
   $ pip install -r zope/requirements-dev.txt
+
+Edit secret.cfg and change all the passwords. This file should not be added to Git because it is secret :).
+
   $ cd zope
-  $ curl -L -O http://downloads.buildout.org/2/bootstrap.py
-  $ python bootstrap.py
   $ cp buildout-configs/secret.cfg.sample buildout-configs/secret.cfg
   $ vim secret.cfg
+  $ ./install.sh devel.cfg
 
-Edit secret.cfg and change all the passwords.
 Run buildout using the devel.cfg configuration::
 
   $ ./bin/buildout -c devel.cfg
