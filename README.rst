@@ -129,7 +129,7 @@ https://github.com/eea/Products.Reportek ::
   $ cd /var/local/bdr/production
   $ . prod-venv/bin/activate
 
-Edit secret.cfg and change all the passwords. This file should not be added to Git because it is secret :).
+Edit secret.cfg and change all the passwords. This file should not be added to Git because it is secret :). ::
 
   $ cd zope
   $ cp buildout-configs/secret.cfg.sample buildout-configs/secret.cfg
@@ -177,7 +177,7 @@ https://github.com/eea/Products.Reportek ::
   $ . staging-venv/bin/activate
   $ pip install -r zope/requirements-staging.txt
 
-Edit secret.cfg and change all the passwords. This file should not be added to Git because it is secret :).
+Edit secret.cfg and change all the passwords. This file should not be added to Git because it is secret :). ::
 
   $ cd zope
   $ cp buildout-configs/secret.cfg.sample buildout-configs/secret.cfg
@@ -225,7 +225,7 @@ that you can control the version of your sources::
   $ . devel-venv/bin/activate
   $ pip install -r zope/requirements-dev.txt
 
-Edit secret.cfg and change all the passwords. This file should not be added to Git because it is secret :).
+Edit secret.cfg and change all the passwords. This file should not be added to Git because it is secret :). ::
 
   $ cd zope
   $ cp buildout-configs/secret.cfg.sample buildout-configs/secret.cfg
