@@ -11,3 +11,4 @@ secret.cfg
 src/
 src
 var/
+.idea/
