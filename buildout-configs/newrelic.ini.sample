@@ -1,0 +1,17 @@
+[newrelic]
+license_key = LICENSE KEY HERE
+app_name = APP NAME HERE
+transaction_tracer.record_sql = obfuscated
+high_security = false
+log_level = debug
+thread_profiler.enabled = true
+transaction_tracer.explain_enabled = true
+transaction_tracer.transaction_threshold = apdex_f
+transaction_tracer.explain_threshold = 0.5
+error_collector.enabled = true
+monitor_mode = true
+ssl = false
+transaction_tracer.stack_trace_threshold = 0.5
+browser_monitoring.auto_instrument = true
+transaction_tracer.enabled = true
+log_file = /tmp/newrelic-python-agent.log
