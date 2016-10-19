@@ -244,12 +244,11 @@ Find out what dir the reportek.converters egg is intalled to and start gunicorn:
 
 Generate documentation
 ----------------------
-Before generate documentation set variable DOCS_PATH from secret.cfg, to the
-path where the program will save the documentation.
+In order to be able to generate the documentation, the `sphinx.cfg <https://github.com/eea/reportek.zopebuildout/blob/master/buildout-configs/sphinx.cfg>`_ needs to be extended by your buildout config file and also the DOCS_PATH variable needs to be set in your secret.cfg file, this path will hold the generated documentation.
 
 To generate documentation::
 
- $ ./make-docs
+ $ ./bin/make-docs
 
 To delete all documentation::
 
@@ -257,6 +256,14 @@ To delete all documentation::
 
 **Be carefull with clean-docs because it removes the whole content of the folder 
 DOCS_PATH.**
+
+Tests
+-----
+In order to be able to run the tests, the `tests.cfg <https://github.com/eea/reportek.zopebuildout/blob/master/buildout-configs/tests.cfg>`_ needs to be extended by your buildout config file.
+
+To run the Products.Reportek's tests::
+
+  $ ./bin/test -m Products.Reportek
 
 ===========================
 Apache vhost configurations
